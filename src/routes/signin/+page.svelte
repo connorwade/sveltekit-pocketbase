@@ -1,6 +1,12 @@
-<h3>Log In!</h3>
 <form method="POST">
-	<label>Email<input type="email" name="email" id="email" /></label>
-	<label>Password<input type="password" name="password" id="password" /></label>
+	<h3>Log In!</h3>
+	<div class="group">
+		<label for="email">Email</label>
+		<input type="email" name="email" id="email" />
+	</div>
+	<div class="group">
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" />
+	</div>
 	<button>Log in</button>
 </form>
