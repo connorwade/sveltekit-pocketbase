@@ -23,6 +23,11 @@
 					</a>
 				</li>
 			{/if}
+			<li aria-current={$page.url.pathname === '/feed' ? 'page' : undefined}>
+				<a href="/feed">
+					<button>Feed</button>
+				</a>
+			</li>
 		</ul>
 
 		{#if user}

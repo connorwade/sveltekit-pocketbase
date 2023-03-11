@@ -31,20 +31,20 @@ export const actions: Actions = {
         };
 
         try {
-            const record = await locals.pb.collection('users').create(data)
+            await locals.pb.collection('users').create(data)
             data.email ??= ""
             data.password ??= ''
-            const { token } = await locals.pb.collection('users').authWithPassword(
+            await locals.pb.collection('users').requestVerification(data.email);
+            await locals.pb.collection('users').authWithPassword(
                 data.email,
                 data.password,
             )
-
             locals.pb.authStore.clear()
         } catch (err) {
             console.error(err)
         }
 
         // on success
-        throw redirect(303, '/login')
+        throw redirect(303, '/signin')
     },
 }

@@ -2,13 +2,24 @@
 // for information about these interfaces
 import PocketBase from 'pocketbase'
 
-interface UserInfo {
+export interface UserInfo {
 	id: string;
 	name: string;
 	avatar: string;
 	aboutme: string;
 	username: string;
 	email: string;
+}
+
+export interface Post {
+	id: string;
+	created: string;
+	updated: string;
+	title: string;
+	content: string;
+	edited: boolean;
+	author: string;
+	likes: number;
 }
 
 declare global {

@@ -22,9 +22,9 @@ export const actions = {
         try {
             await locals.pb.collection('users').update(locals?.user?.id, { name, avatar, aboutme })
         } catch (err) {
-            throw error(404, "Something went wrong while updating your profile.");
+            throw error(400, "Something went wrong while updating your profile!");
         }
 
-        throw redirect(303, '/profile')
+        throw redirect(301, '/profile');
     }
 }

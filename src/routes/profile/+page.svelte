@@ -1,15 +1,35 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 
+	let loading: boolean;
+	$: loading = false;
 	export let data: any;
 	const { user } = data;
+
+	const submitUpdateProfile = () => {
+		loading = true;
+		return async ({ result }) => {
+			switch (result.type) {
+				case 'success':
+					await invalidateAll();
+					break;
+				case 'error':
+					break;
+				default:
+					await applyAction(result);
+					break;
+			}
+			loading = false;
+		};
+	};
 </script>
 
 {#if user}
 	<form action="/profile" method="POST">
 		<div class="group">
 			<label for="name">Name</label>
-			<input type="text" name="name" id="name" value={user.name} />
+			<input type="text" name="name" id="name" disabled={loading} value={user.name} />
 		</div>
 		<div class="group">
 			<label for="username">Username</label>
@@ -19,12 +39,21 @@
 			<label for="email">Email</label>
 			<input type="email" id="email" disabled value={user.email} />
 		</div>
+		<a href="/reset-password"><button>Reset Password</button></a>
 		<h3>About me</h3>
-		<textarea name="aboutme" id="aboutme" cols="30" rows="10" value={user?.aboutme} />
+		<textarea
+			name="aboutme"
+			id="aboutme"
+			cols="30"
+			rows="10"
+			value={user?.aboutme}
+			disabled={loading}
+		/>
 		<h3>Select Avatar</h3>
 		<div class="radio-group">
 			<div class="field-row">
 				<input
+					disabled={loading}
 					type="radio"
 					checked={user.avatar === 'avatar1'}
 					name="avatar"
@@ -37,6 +66,7 @@
 			</div>
 			<div class="field-row">
 				<input
+					disabled={loading}
 					type="radio"
 					checked={user.avatar === 'avatar2'}
 					name="avatar"
@@ -49,6 +79,7 @@
 			</div>
 			<div class="field-row">
 				<input
+					disabled={loading}
 					type="radio"
 					checked={user.avatar === 'avatar3'}
 					name="avatar"
@@ -61,6 +92,7 @@
 			</div>
 			<div class="field-row">
 				<input
+					disabled={loading}
 					type="radio"
 					checked={user.avatar === 'avatar4'}
 					name="avatar"
@@ -72,7 +104,7 @@
 				</label>
 			</div>
 		</div>
-		<button type="submit">Save Settings</button>
+		<button type="submit" disabled={loading}>Save Settings</button>
 	</form>
 {/if}
 

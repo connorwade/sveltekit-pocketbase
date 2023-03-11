@@ -18,10 +18,25 @@ export const actions: Actions = {
         }
 
         if (!data.email || !data.password) {
-            throw console.error("Password or data is undefined");
+            return {
+                error: "Please fill in all fields"
+            }
         }
 
-        await locals.pb.collection('users').authWithPassword(data.email, data.password)
+        try {
+            await locals.pb.collection('users').authWithPassword(data.email, data.password)
+            if (!locals.pb?.authStore?.model?.verified) {
+                locals.pb.authStore.clear();
+
+                return {
+                    notVerified: true,
+                }
+            }
+        } catch (err) {
+            return {
+                error: "Invalid email or password"
+            }
+        }
 
         // On success:
         throw redirect(303, '/')
