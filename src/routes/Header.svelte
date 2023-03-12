@@ -6,16 +6,6 @@
 <header>
 	<nav>
 		<ul>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">
-					<button>Home</button>
-				</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">
-					<button>About</button>
-				</a>
-			</li>
 			{#if user}
 				<li aria-current={$page.url.pathname === '/bio' ? 'page' : undefined}>
 					<a href="/bio">
@@ -32,8 +22,8 @@
 
 		{#if user}
 			<div class="user-avatar">
+				<p>{user.username}</p>
 				<img class="avatar" src={`/avatars/${user.avatar}.gif`} alt={user.name} />
-				<p>Welcome back, {user.username}!</p>
 			</div>
 		{/if}
 		<ul class={`sign-ins ${user ? '' : 'ml-auto'}`}>
@@ -41,7 +31,9 @@
 				<a href="/signin"><button>Sign in</button></a>
 				<a href="/register"> <button>Sign up</button></a>
 			{:else}
-				<a href="/profile"><button>Profile</button></a>
+				<a href="/profile" aria-current={$page.url.pathname === '/profile' ? 'page' : undefined}
+					><button>Profile</button></a
+				>
 				<form action="/logout" method="POST"><button>Log out</button></form>
 			{/if}
 		</ul>
@@ -53,7 +45,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 1em;
+		padding: 1rem 0;
 		gap: 10px;
 	}
 	ul {
@@ -81,5 +73,8 @@
 	}
 	.ml-auto {
 		margin-left: auto;
+	}
+	[aria-current] button {
+		text-decoration: underline;
 	}
 </style>

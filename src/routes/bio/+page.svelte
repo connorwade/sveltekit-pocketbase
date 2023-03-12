@@ -24,6 +24,6 @@
 	}
 	main {
 		background-color: white;
-		padding: 1em;
+		padding: 1rem;
 	}
 </style>

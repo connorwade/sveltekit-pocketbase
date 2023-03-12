@@ -1,13 +1,19 @@
-<script>
+<script lang="ts">
 	import PostList from '$lib/components/PostList.svelte';
+	import type { PageData } from './$types';
 
-	export let data;
+	export let data: PageData;
 	const { posts } = data;
 </script>
 
 <main>
-	<h1>Welcome to your feed!</h1>
-
-	<a href="/feed/create-post"><button>Create new post +</button></a>
+	<h1>Feed</h1>
 	<PostList {posts} />
 </main>
+
+<style>
+	main {
+		background: white;
+		padding: 1rem;
+	}
+</style>

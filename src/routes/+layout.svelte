@@ -3,6 +3,7 @@
 	import Header from './Header.svelte';
 	import './98.css';
 	import './styles.css';
+	import Footer from './Footer.svelte';
 
 	export let data: PageData;
 	const { signedIn, user } = data;
@@ -14,4 +15,6 @@
 	<main>
 		<slot />
 	</main>
+
+	<Footer />
 </div>

@@ -12,7 +12,7 @@ export const load = (async ({ locals }) => {
 }) satisfies LayoutServerLoad;
 
 export const actions = {
-    default: async ({ locals, request }) => {
+    default: async ({ locals, request }: { locals: any, request: any }) => {
         const formData = await request.formData()
 
         const name = formData.get('name')?.toString();

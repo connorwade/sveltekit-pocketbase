@@ -6,6 +6,7 @@
 </script>
 
 <div class="post-list">
+	<hr />
 	{#each posts as post}
 		<PostListItem {post} />
 	{/each}

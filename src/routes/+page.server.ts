@@ -1,2 +1,9 @@
-// import { pb } from "$lib/server/pb"
-import type { Actions } from '@sveltejs/kit'
+import { redirect, type Load } from '@sveltejs/kit';
+
+export const load: Load = async ({ locals }) => {
+    if (!locals.user) {
+        throw redirect(302, '/signin');
+    }
+
+    throw redirect(302, '/feed');
+}

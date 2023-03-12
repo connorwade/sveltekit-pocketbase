@@ -1,22 +1,23 @@
-import { pb } from "$lib/pb";
-import { serializeNonPOJOs } from "$lib/utils";
-import { redirect } from "@sveltejs/kit";
+import { serializeNonPOJOs } from '$lib/utils';
+import { error, redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-/** @type {import('@sveltejs/kit').Load} */
-export const load = async ({ locals }) => {
-    if (locals.user) {
-        const records = await pb.collection('posts').getFullList({
-            sort: '-created',
-        });
-        const posts = await serializeNonPOJOs(records).map(async (post: any) => {
-            post.author = await pb.collection('users').getOne(post.author)
-        });
-
-        return {
-            user: locals.user,
-            posts
-        }
-    } else {
-        throw redirect(303, '/signin');
+export const load = (async ({ locals }) => {
+    if (!locals) {
+        throw redirect(303, 'login');
     }
-}
+
+    const getPosts = async () => {
+        try {
+            return serializeNonPOJOs(await locals.pb.collection('posts').getFullList());
+        }
+        catch (err: any) {
+            console.error(err);
+            throw error(err.status, err.message);
+        }
+    }
+
+    return {
+        posts: await getPosts()
+    }
+}) satisfies PageServerLoad;

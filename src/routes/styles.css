@@ -12,12 +12,20 @@
 html {
     background-color: #bbb;
     font-size: 62.5%;
+    max-width: 100vw;
 }
 body {
     font-family: "Pixelated MS Sans Serif", sans-serif;
     max-width: 800px;
-    margin: 0 auto;
     color: black;
+    margin-bottom: 53px;
+    margin: 0 1rem;
+}
+
+@media (min-width: 801px) {
+    body {
+        margin: 0 auto;
+    }
 }
 button {
     cursor: pointer;
@@ -31,11 +39,15 @@ form {
 .group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 }
 .group label {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
 }
 .group input {
-    padding: 0.5em;
+    padding: 0.5rem;
+}
+h1 {
+    line-height: 0;
+    margin-bottom: 6rem;
 }
