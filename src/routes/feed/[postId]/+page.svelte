@@ -18,7 +18,10 @@
 	<div class="post-main">
 		<a href={`/feed`} type="submit"> &laquo; Back to feed</a>
 		<p>{formattedDate}</p>
-		<h4><img src={`/avatars/${author?.avatar}.gif`} alt={author.username} /> {author.username}</h4>
+		<h4>
+			<img src={`/avatars/${author?.avatar}.gif`} alt={author.username} />
+			<a href={`/bio/${author.id}`}>{author.username}</a>
+		</h4>
 		<h1>{post.title}</h1>
 		<p>{post.content}</p>
 

@@ -3,7 +3,7 @@ import { redirect, type Actions, type Load } from '@sveltejs/kit';
 /** @type {import('@sveltejs/kit').Load} */
 export const load: Load = async ({ locals }) => {
     if (!locals.user) {
-        throw redirect(303, '/signin');
+        throw redirect(302, '/signin');
     }
 }
 

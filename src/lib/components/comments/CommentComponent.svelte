@@ -19,7 +19,9 @@
 		<p>{formattedDate}</p>
 		<div class="comment__author">
 			<img src={`/avatars/${comment?.author?.avatar}.gif`} alt={comment?.author?.username} />
-			<h5>{comment?.author?.username}</h5>
+			<h5>
+				<a href={`/bio/${comment?.author?.id}`}>{comment?.author?.username}</a>
+			</h5>
 		</div>
 	{/if}
 	<p class="comment-body">{comment?.content}</p>

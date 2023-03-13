@@ -5,7 +5,7 @@ import type { LikedItems } from "../../../../../Code/sveltekit-pocketbase/src/ap
 /** @type {import('@sveltejs/kit').Load} */
 export const load: Load = async ({ locals }) => {
     if (!locals.user) {
-        throw redirect(303, '/signin');
+        throw redirect(302, '/signin');
     }
 
     throw redirect(303, '/feed');
