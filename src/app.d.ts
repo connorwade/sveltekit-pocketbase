@@ -2,6 +2,11 @@
 // for information about these interfaces
 import PocketBase from 'pocketbase'
 
+export interface LikedItems {
+	posts: string[];
+	comments: string[];
+}
+
 export interface UserInfo {
 	id: string;
 	name: string;
@@ -9,6 +14,7 @@ export interface UserInfo {
 	aboutme: string;
 	username: string;
 	email: string;
+	likedItems: LikedItems;
 }
 
 export interface Post {
@@ -20,6 +26,19 @@ export interface Post {
 	edited: boolean;
 	author: string;
 	likes: number;
+}
+
+export interface Comment {
+	id: string;
+	created: string;
+	updated: string;
+	content: string;
+	edited: boolean;
+	author: string | UserInfo;
+	likes: number;
+	postId: string;
+	isUsers?: boolean;
+	isLikedByUser?: boolean;
 }
 
 declare global {

@@ -27,7 +27,8 @@ export const actions: Actions = {
             password,
             passwordConfirm,
             name,
-            avatar: 'avatar1'
+            avatar: 'avatar1',
+            likedItems: { posts: [], comments: [] },
         };
 
         try {
